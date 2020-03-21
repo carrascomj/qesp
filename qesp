@@ -1,0 +1,62 @@
+#!/usr/bin/perl
+
+# Script to remove annoying characters of names in a directory.
+
+# Author: Jorge Carrasco Muriel
+# Date of creation: 27/02/2019
+
+use strict;
+use warnings;
+
+sub trim{
+    my $new_name = $_[0];
+    $new_name =~ s/[\(\)\s]//g;
+    rename $_[0], $new_name;
+    return $new_name;
+}
+
+sub qesp{
+    my $target_dir = $_[0];
+    my $recursive = $_[1] ? $_[1] : 0;
+    if ($target_dir =~ /\/$/){
+        chop $target_dir
+    }
+    opendir(DIR, $target_dir);
+    my @files = readdir(DIR); # all files/dirs in dir
+    closedir(DIR);
+    foreach my $f (@files) {
+        my $nf = trim("$target_dir/$f");
+        if ($recursive && -d $nf && $f !~ /^\./g){
+            # avoid hidden, self and top directories
+            qesp($nf, "T")
+        }
+    }
+}
+
+my $usage = "Script to remove annoying characters of names in a directory.
+qesp [target_dir] [-r | --recursive]
+    - target_dir: default '.';
+    - -r, --recursive: recursively attempts to rename whole directory tree;
+    - -h, --help: prints this usage text and exit.\n";
+my $target_dir = "."; # default directory
+my $r = 0; # default NOT recursive
+my @params = @ARGV;
+# parameters handling
+foreach my $p (@params) {
+    if ($p eq "-r" || $p eq "--recursive"){
+        $r = "T";
+        print "Recursively qesping...\n"
+    } elsif ($p eq "-h" || $p eq "--help" || $p eq "-help"){
+        print $usage;
+        exit 0;
+    } elsif ($p =~ /^-/g){
+        print "Unknown parameter: $p.\n'qesp -h' for usage.\n";
+        exit 1;
+    }
+}
+@params = grep { $_ !~ /^-/g} @params;
+# if there's still a parameter, it's the directory
+if ( $params[0] ) {
+    $target_dir = $params[0]
+}
+qesp($target_dir, $r)
