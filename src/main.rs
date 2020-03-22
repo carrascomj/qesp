@@ -13,8 +13,8 @@ fn main() {
         qesp [target_dir] [-r | --recursive]
     - target_dir: default '.';
     - -r, --recursive: recursively attempts to rename whole directory tree;
-    - -h, --help: prints this usage text and exit.\n")
-} if let Err(e) = qesp::qesp(config) {
+    - -h, --help: prints this usage text and exit.\n");
+} else if let Err(e) = qesp::qesp(config) {
         eprintln!("Application error: {}", e);
 
         process::exit(1);
