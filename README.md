@@ -1,11 +1,22 @@
 # qesp
-[![Build Status](https://travis-ci.com/carrascomj/ripkmer.svg?branch=master)](https://travis-ci.com/carrascomj/ripkmer)  
+[![Build Status](https://travis-ci.com/carrascomj/qesp.svg?branch=master)](https://travis-ci.com/carrascomj/qesp)
+[![Build Status](https://img.shields.io/crates/v/qesp.svg)](https://crates.io/crates/qesp/)  
+
 Rust binary crate to remove characters of all files in a directory. It supports recursive
 walking through the tree.
 
+Check the tiny [APÎ documentation](https://docs.rs/qesp/0.1.0/qesp) for some
+details about the implementation.
 
 ## Installation
-You can build it with cargo.
+You can build it with [cargo](https://doc.rust-lang.org/cargo/) from
+[crates.io](https://crates.io/crates/qesp/).
+
+```shell
+cargo install qesp
+```
+
+#### Installing from source
 Just clone the repository and install it with cargo. For instance:
 
 ```shell
@@ -13,7 +24,7 @@ git clone https://github.com/carrascomj/qesp.git
 cargo install --path qesp
 ```
 
-### But I don't want this cargo stuff...
+#### But I don't want this cargo stuff...
 Then download the perl script [qesp](https://github.com/carrascomj/qesp/blob/master/benchmarks/qesp)
 and put in under your PATH. For instance:
 
@@ -23,11 +34,19 @@ mv qesp ~/.local/bin
 ```
 
 ## Usage
-    CLI tool to remove annoying characters of names in a directory.
-    qesp [target_dir] [-r | --recursive]
-        - target_dir: default '.';
-        - -r, --recursive: recursively attempts to rename whole directory tree;
-        - -h, --help: prints this usage text and exit.\n
+    qesp 0.1.0
+    Remove annoying characters of names in a directory
+
+    USAGE:
+        qesp [FLAGS] [dir]
+
+    FLAGS:
+        -h, --help         Prints help information
+        -r, --recursive    recursively attempts to rename whole directory tree
+        -V, --version      Prints version information
+
+    ARGS:
+        <dir>    Target directory [default: .]
 
 ## "Annoying characters"
 Space and parenthesis.
