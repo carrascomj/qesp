@@ -1,26 +1,18 @@
-use std::env;
 use std::error::Error;
 use std::fs;
 use std::path::Path;
+use structopt::StructOpt;
 
+/// Rremove annoying characters of names in a directory.
+#[derive(StructOpt, Debug)]
+#[structopt(name = "qesp")]
 pub struct Config {
+    /// Target directory
+    #[structopt(default_value = ".")]
     pub dir: String,
+    /// recursively attempts to rename whole directory tree
+    #[structopt(long = "recursive", short = "r")]
     pub recursive: bool,
-}
-
-impl Config {
-    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
-        args.next();
-
-        let dir = match args.next() {
-            Some(arg) => arg,
-            None => String::from("."),
-        };
-
-        let recursive = env::var("RECURSIVE").is_err();
-
-        Ok(Config { dir, recursive })
-    }
 }
 
 /// Trim annoying characters from a string
