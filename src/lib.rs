@@ -3,7 +3,7 @@ use std::fs;
 use std::path::Path;
 use structopt::StructOpt;
 
-/// Rremove annoying characters of names in a directory.
+/// Remove annoying characters of names in a directory.
 #[derive(StructOpt, Debug)]
 #[structopt(name = "qesp")]
 pub struct Config {
