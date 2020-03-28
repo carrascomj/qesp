@@ -34,7 +34,7 @@ mv qesp ~/.local/bin
 ```
 
 ## Usage
-    qesp 0.1.0
+    qesp 0.2.0
     Remove annoying characters of names in a directory
 
     USAGE:
@@ -44,6 +44,9 @@ mv qesp ~/.local/bin
         -h, --help         Prints help information
         -r, --recursive    recursively attempts to rename whole directory tree
         -V, --version      Prints version information
+
+    OPTIONS:
+        -p, --pattern <pattern>    annoying characters to be removed [default: [ ()]]
 
     ARGS:
         <dir>    Target directory [default: .]
