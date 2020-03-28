@@ -28,9 +28,8 @@ fn trim(from: &str, pat: &Regex) -> String {
     pat.replace_all(from, "").to_string()
 }
 
-
 /// Process arguments and call qesp
-pub fn run(config: Config) -> Result<(), Box<dyn Error>>{
+pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     qesp(config.dir, config.recursive, &config.pattern)
 }
 
