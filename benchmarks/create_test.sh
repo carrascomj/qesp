@@ -1,10 +1,10 @@
 mkdir $1
 cd $1
-for i in {1..1000}
+for i in {1..10}
 do
   ip="$i  ())"
   mkdir "$ip"
-  for j in {1..1000}
+  for j in {1..10}
   do
     jp="$ip/$j asd()()wcwc  ())"
     mkdir "$jp"
