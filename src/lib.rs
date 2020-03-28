@@ -1,4 +1,5 @@
 use regex::Regex;
+use std::borrow::Cow;
 use std::error::Error;
 use std::fs;
 use std::path::Path;
@@ -24,8 +25,8 @@ pub struct Config {
 }
 
 /// Trim annoying characters from a string
-fn trim(from: &str, pat: &Regex) -> String {
-    pat.replace_all(from, "").to_string()
+fn trim<'a>(from: &'a str, pat: &Regex) -> Cow<'a, str> {
+    pat.replace_all(from, "")
 }
 
 /// Process arguments and call qesp
@@ -55,9 +56,10 @@ pub fn qesp(dir: String, recursive: bool, pattern: &Regex) -> Result<(), Box<dyn
     for file in target {
         let file = file?;
         let from = String::from(file.path().to_str().unwrap());
-        let path = trim(&from, pattern);
-        fs::rename(from, &path)?; // Rename a.txt to b.txt
-        if Path::new(&path).is_dir() & recursive {
+        let path = &*trim(&from, pattern);
+        // let path = pattern.replace_all(&from, "");
+        fs::rename(&from, path)?; // Rename a.txt to b.txt
+        if Path::new(path).is_dir() & recursive {
             let dir = String::from(path);
             qesp(dir, recursive, pattern)?;
         }
