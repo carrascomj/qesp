@@ -1,6 +1,6 @@
 [package]
 name = "qesp"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["carrascomj <carrascomurielj@gmail.com>"]
 edition = "2018"
 description = "Tool to remove annoying characters of names in a directory."
@@ -12,9 +12,6 @@ license = "MIT"
 [badges]
 travis-ci = { repository = "carrascomj/qesp", branch = "master" }
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 structopt="0.3"
-lazy_static = "1.4.0"
 regex = "1"

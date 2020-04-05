@@ -34,7 +34,7 @@ mv qesp ~/.local/bin
 ```
 
 ## Usage
-    qesp 0.2.0
+    qesp 0.2.1
     Remove annoying characters of names in a directory
 
     USAGE:
