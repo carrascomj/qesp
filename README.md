@@ -1,12 +1,10 @@
 # qesp
 [![Build Status](https://travis-ci.com/carrascomj/qesp.svg?branch=master)](https://travis-ci.com/carrascomj/qesp)
-[![Build Status](https://img.shields.io/crates/v/qesp.svg)](https://crates.io/crates/qesp/)  
+[![Build Status](https://img.shields.io/crates/v/qesp.svg)](https://crates.io/crates/qesp/)
+[![](https://docs.rs/qesp/badge.svg)](https://docs.rs/qesp)  
 
 Rust binary crate to remove characters of all files in a directory. It supports recursive
 walking through the tree.
-
-Check the tiny [API documentation](https://docs.rs/qesp) for some
-details about the implementation.
 
 ## Installation
 You can build it with [cargo](https://doc.rust-lang.org/cargo/) from
