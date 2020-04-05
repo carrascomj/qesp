@@ -5,7 +5,7 @@
 Rust binary crate to remove characters of all files in a directory. It supports recursive
 walking through the tree.
 
-Check the tiny [APÎ documentation](https://docs.rs/qesp/0.1.0/qesp) for some
+Check the tiny [API documentation](https://docs.rs/qesp) for some
 details about the implementation.
 
 ## Installation
