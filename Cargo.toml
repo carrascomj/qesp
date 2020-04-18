@@ -9,9 +9,6 @@ categories = ["command-line-utilities"]
 readme = "README.md"
 license = "MIT"
 
-[badges]
-travis-ci = { repository = "carrascomj/qesp", branch = "master" }
-
 [dependencies]
 structopt="0.3"
 regex = "1"
