@@ -30,15 +30,10 @@ fn trim<'a>(from: &'a str, pat: &Regex) -> Cow<'a, str> {
 }
 
 /// Process arguments and call qesp
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    qesp(config.dir, config.recursive, &config.pattern)
-}
-
-/// Trim annoying characters of filenames in a directory.
 ///
 /// # Examples
 /// ```
-/// use qesp::{Config, qesp};
+/// use qesp::{Config, run};
 /// use regex::Regex;
 /// # use std::fs;
 /// # use std::path::Path;
@@ -46,19 +41,29 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 /// # fs::create_dir(Path::new("annoying name for dir(very annoying)")).unwrap();
 /// let recursive = false;
 /// let dir = String::from(".");
-/// qesp(dir, recursive, &Regex::new("[ ()]").unwrap()).unwrap();
+/// let pattern = Regex::new("[ ()]").unwrap();
+/// run(Config {
+///     dir,
+///     recursive,
+///     pattern,
+/// })
+/// .unwrap();
 /// # assert!(Path::new("annoyingnamefordirveryannoying").is_dir());
 /// # fs::remove_dir("annoyingnamefordirveryannoying").unwrap();
 /// ```
-pub fn qesp(dir: String, recursive: bool, pattern: &Regex) -> Result<(), Box<dyn Error>> {
+pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+    qesp(config.dir, config.recursive, &config.pattern)
+}
+
+/// Trim annoying characters of filenames in a directory.
+fn qesp(dir: String, recursive: bool, pattern: &Regex) -> Result<(), Box<dyn Error>> {
     let target = fs::read_dir(dir)?;
 
     for file in target {
         let file = file?;
         let from = String::from(file.path().to_str().unwrap());
         let path = &*trim(&from, pattern);
-        // let path = pattern.replace_all(&from, "");
-        fs::rename(&from, path)?; // Rename a.txt to b.txt
+        fs::rename(&from, path)?;
         if Path::new(path).is_dir() & recursive {
             let dir = String::from(path);
             qesp(dir, recursive, pattern)?;
