@@ -49,7 +49,7 @@ jobs:
         with:
           command: test
 
-  test:
+  test-windows:
     name: Test Suite
     runs-on: windows-latest
     strategy:
